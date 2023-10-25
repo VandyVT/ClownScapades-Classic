@@ -1,0 +1,35 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1045 &1
+EditorBuildSettings:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scene/Scenes/Intro.unity
+    guid: a707c1e3d5b133241a9ed0f504b11429
+  - enabled: 1
+    path: Assets/Scene/Scenes/MainMenu.unity
+    guid: 3094bb240dd38aa48b775b75553549e6
+  - enabled: 1
+    path: Assets/Scene/Scenes/MainGame/CH1Cut.unity
+    guid: 1385a76c1f460ad4b98a41b1d77cd192
+  - enabled: 1
+    path: Assets/Scene/Scenes/MainGame/EndingScene.unity
+    guid: ed033c1aa1a5a364893b195775b9756f
+  - enabled: 1
+    path: Assets/Scene/Scenes/MainGame/SecretCh1.unity
+    guid: 92ea84215657ca54aadf0bf98a7c353b
+  - enabled: 1
+    path: Assets/Scene/Scenes/MainGame/MainGame.unity
+    guid: 4e0d552d4071548499e1b9872d09f3d3
+  - enabled: 1
+    path: Assets/Scene/Scenes/MainGame/NightGame.unity
+    guid: f1697898579bee4438bfe5d94bcd8ff0
+  - enabled: 1
+    path: Assets/Scene/Scenes/MainGame1/EndingCh2.unity
+    guid: 4c5bab233ffa7e347bbcfae8c15ac482
+  - enabled: 1
+    path: Assets/Scene/Scenes/MainGame1/MainGame1.unity
+    guid: 21d139f3004442549bffb12ed4625141
+  m_configObjects: {}
