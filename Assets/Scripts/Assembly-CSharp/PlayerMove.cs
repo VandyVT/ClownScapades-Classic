@@ -6,9 +6,12 @@ using UnityEngine;
 public class PlayerMove : MonoBehaviour
 {
 	// Token: 0x060000B5 RID: 181 RVA: 0x000041F5 File Offset: 0x000023F5
+
+	public static PlayerMove instance;
 	private void Awake()
 	{
 		this.charController = base.GetComponent<CharacterController>();
+		instance = this;
 		//this.controls = new PlayerController();
 	}
 
@@ -19,19 +22,35 @@ public class PlayerMove : MonoBehaviour
 		this.FlashKey();
 	}
 
-	// Token: 0x060000B7 RID: 183 RVA: 0x0000421C File Offset: 0x0000241C
-	private void PlayerMovement()
+    // Token: 0x060000B7 RID: 183 RVA: 0x0000421C File Offset: 0x0000241C
+    private Vector2 movementVector;
+    private bool isRunning;
+
+    private void PlayerMovement()
 	{
-		float axis = Input.GetAxis(this.horizontalInputName);
-		float axis2 = Input.GetAxis(this.verticalInputName);
-		Vector3 a = base.transform.forward * axis2;
-		Vector3 b = base.transform.right * axis;
-		this.charController.SimpleMove(Vector3.ClampMagnitude(a + b, 1f) * this.movementSpeed);
-		if ((axis2 != 0f || axis != 0f) && this.OnSlope())
-		{
-			this.charController.Move(Vector3.down * this.charController.height / 2f * this.slopeForce * Time.deltaTime);
-		}
-		this.SetMovementSpeed();
+        if (UnityEngine.Device.SystemInfo.deviceType == DeviceType.Handheld)
+        {
+            // Check if fixedJoystick is active (you can adjust the threshold as needed)
+            if (fixedJoystick.Direction.magnitude >= 0f)
+            {
+                movementVector = fixedJoystick.Direction;
+            }
+
+            isRunning = (Mathf.Abs(movementVector.x) >= 0.75f || Mathf.Abs(movementVector.y) >= 0.75f);
+        }
+
+        Vector3 forwardMovement = transform.forward * movementVector.y;
+        Vector3 rightMovement = transform.right * movementVector.x;
+
+        if (charController.enabled == true)
+        {
+            charController.SimpleMove(Vector3.ClampMagnitude(forwardMovement + rightMovement, 1.0f) * movementSpeed);
+        }
+
+        if ((movementVector.y != 0 || movementVector.x != 0) && OnSlope())
+            charController.Move(Vector3.down * charController.height / 2 * slopeForce * Time.deltaTime);
+
+        this.SetMovementSpeed();
 		this.JumpInput();
 	}
 
@@ -179,4 +198,6 @@ public class PlayerMove : MonoBehaviour
 
 	// Token: 0x040000B2 RID: 178
 	public GameObject flashlightActive;
+
+	public FixedJoystick fixedJoystick;
 }
